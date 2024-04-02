@@ -36,3 +36,8 @@ export type User = {
 		bs: string;
 	};
 };
+
+export interface PostsWithCommentsAndUser extends Post {
+	comments: Comment[];
+	user: string;
+}

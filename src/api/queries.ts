@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { QueryKeys } from "@utils/constants";
+import type { Comment, Post, PostsWithCommentsAndUser, User } from "./types";
 
 // Create a client
 export const queryClient = new QueryClient({
@@ -10,70 +10,45 @@ export const queryClient = new QueryClient({
 	},
 });
 
-export function fetchAllPosts() {
-	return queryClient.fetchQuery({
-		queryKey: [QueryKeys.POSTS],
-		queryFn: async () => {
-			try {
-				const posts = await fetch(
-					"https://jsonplaceholder.typicode.com/posts",
-				).then((response) => response.json());
+const callJson = (response: Response) => response.json();
 
-				return Promise.resolve(posts);
-			} catch (error) {
-				return Promise.reject(error);
-			}
-		},
-	});
-}
+export async function fetchPostsWithCommentsAndUsers() {
+	try {
+		// Fetch posts, comments, and users
+		const posts = fetch("https://jsonplaceholder.typicode.com/posts").then(
+			callJson,
+		) as Promise<Post[]>;
+		const comments = fetch(
+			"https://jsonplaceholder.typicode.com/comments",
+		).then(callJson) as Promise<Comment[]>;
+		const users = fetch("https://jsonplaceholder.typicode.com/users").then(
+			callJson,
+		) as Promise<User[]>;
 
-export function fetchPost(postId: number) {
-	return queryClient.fetchQuery({
-		queryKey: [`${QueryKeys.POSTS}/${postId}`],
-		queryFn: async () => {
-			const posts = await fetch(
-				`https://jsonplaceholder.typicode.com/posts/${postId}`,
-			).then((response) => response.json());
+		// Wait for all fetch operations to complete
+		return await Promise.all([posts, comments, users]).then(
+			([posts, comments, users]) => {
+				// Join posts and comments based on postId
+				const postsWithCommentsAndUser = posts.reduce(
+					(acc: PostsWithCommentsAndUser[], post) => {
+						const postComments = comments.filter(
+							(comment) => comment.postId === post.id,
+						);
+						const postUser = users.find((user) => user.id === post.userId);
+						acc.push({
+							...post,
+							comments: postComments,
+							user: postUser ? postUser.name : "Unknown User",
+						});
+						return acc;
+					},
+					[],
+				);
 
-			return posts;
-		},
-	});
-}
-
-export function fetchAllComments() {
-	return queryClient.fetchQuery({
-		queryKey: [QueryKeys.COMMENTS],
-		queryFn: async () => {
-			const posts = await fetch(
-				"https://jsonplaceholder.typicode.com/comments",
-			).then((response) => response.json());
-
-			return posts;
-		},
-	});
-}
-export function fetchPostComments(postId: number) {
-	return queryClient.fetchQuery({
-		queryKey: [`${QueryKeys.COMMENTS}/${postId}`],
-		queryFn: async () => {
-			const posts = await fetch(
-				`https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
-			).then((response) => response.json());
-
-			return posts;
-		},
-	});
-}
-
-export function fetchAllUsers() {
-	return queryClient.fetchQuery({
-		queryKey: [QueryKeys.USERS],
-		queryFn: async () => {
-			const posts = fetch("https://jsonplaceholder.typicode.com/users").then(
-				(response) => response.json(),
-			);
-
-			return posts;
-		},
-	});
+				return Promise.resolve(postsWithCommentsAndUser);
+			},
+		);
+	} catch (error) {
+		return Promise.reject(error);
+	}
 }
