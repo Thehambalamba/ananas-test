@@ -25,8 +25,12 @@ function Post({
 
 	const commentCount = comments.length;
 
+	const stylePost = linkTo?.length
+		? "flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4 hover:border-blue-800"
+		: "flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4 ";
+
 	const PostContent = (
-		<section className="flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4 hover:border-blue-800">
+		<section className={stylePost}>
 			<h2 className="text-xl capitalize font-medium">{title}</h2>
 			<p className="text-base capitalize pl-2">{body}</p>
 			<span className="flex justify-between px-2">
@@ -40,7 +44,11 @@ function Post({
 
 	return (
 		<article className="flex flex-col ">
-			{linkTo ? <NavLink to={linkTo}>{PostContent}</NavLink> : PostContent}
+			{linkTo?.length ? (
+				<NavLink to={linkTo}>{PostContent}</NavLink>
+			) : (
+				PostContent
+			)}
 
 			<section className="border-l-2 pl-8 flex flex-col gap-4">
 				<CommentList comments={comments} helloMessage={helloMessage} />
