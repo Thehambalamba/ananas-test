@@ -3,6 +3,7 @@ import Post from "@/components/post";
 import Search from "@/components/search";
 import withAllPostsData from "@/hooks/hoc/with-all-posts-data";
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const COMPONENT_NAME = "<Posts />";
 
@@ -29,6 +30,8 @@ function Posts({ helloMessage, postsData }: Props) {
 							);
 						}, [postsData, searchQuery]);
 
+						const hasPosts = filteredPosts.length;
+
 						return (
 							<section>
 								<input
@@ -39,17 +42,27 @@ function Posts({ helloMessage, postsData }: Props) {
 									}}
 									placeholder="Search posts..."
 								/>
-								{filteredPosts?.map(({ id, title, body, user, comments }) => (
-									<Post
-										key={`post-${id}`}
-										id={id}
-										helloMessage={helloMessage}
-										title={title}
-										body={body}
-										user={user}
-										comments={comments}
-									/>
-								))}
+								{hasPosts ? (
+									filteredPosts?.map(({ id, title, body, user, comments }) => (
+										<NavLink
+											key={`post-${id}`}
+											to={`/post/${id}`}
+											target="_blank"
+											rel="noopener noreferrer"
+										>
+											<Post
+												id={id}
+												helloMessage={helloMessage}
+												title={title}
+												body={body}
+												user={user}
+												comments={comments}
+											/>
+										</NavLink>
+									))
+								) : (
+									<p className="text-xl">No posts present.</p>
+								)}
 							</section>
 						);
 					}}
