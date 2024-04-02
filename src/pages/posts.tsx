@@ -1,6 +1,6 @@
 import type { PostsWithCommentsAndUser } from "@/api/types";
-import Post from "@/components/post";
-import Search from "@/components/search";
+import Post from "@/components/post/post";
+import Search from "@/components/search/search";
 import withAllPostsData from "@/hooks/hoc/with-all-posts-data";
 import React from "react";
 

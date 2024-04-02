@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 
-const COMPONENT_NAME = "<Layout />";
+export const COMPONENT_NAME = "<Layout />";
 
 type Props = {
 	helloMessage: string;
@@ -12,9 +12,7 @@ function Layout({ helloMessage }: Props) {
 
 	const styleLink = React.useMemo(() => {
 		return ({ isActive }: { isActive: boolean }) =>
-			isActive
-				? "p-2 active"
-				: "p-2 underline text-blue-600 hover:text-blue-800";
+			isActive ? "p-2" : "p-2 underline text-blue-600 hover:text-blue-800";
 	}, []);
 
 	return (

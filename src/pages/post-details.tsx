@@ -1,4 +1,4 @@
-import PostDetailsUI from "@/components/post-details-ui";
+import Post from "@/components/post/post";
 import withPostData from "@/hooks/hoc/with-post-data";
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,7 @@ function PostDetails({ helloMessage }: Props) {
 		return <div>Post ID is missing.</div>;
 	}
 
-	const EnhancedPostDetailsUI = withPostData(PostDetailsUI);
+	const EnhancedPostDetailsUI = withPostData(Post);
 
 	return <EnhancedPostDetailsUI helloMessage={helloMessage} postId={postId} />;
 }

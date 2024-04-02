@@ -1,6 +1,6 @@
 import React from "react";
 
-const COMPONENT_NAME = "<Search />";
+export const COMPONENT_NAME = "<Search />";
 
 type SearchProps = {
 	helloMessage: string;

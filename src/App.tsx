@@ -6,8 +6,8 @@ import {
 	createRoutesFromElements,
 } from "react-router-dom";
 
+import Layout from "@/components/layout/layout";
 import { queryClient } from "@api/queries";
-import Layout from "@components/layout";
 import Home from "@pages/home";
 import PostDetails from "@pages/post-details";
 import Posts from "@pages/posts";

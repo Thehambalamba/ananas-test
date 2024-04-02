@@ -1,5 +1,5 @@
 import type { Comment as CommentType } from "@/api/types";
-import CommentList from "@/components/comment-list";
+import CommentList from "@/components/comment-list/comment-list";
 import { NavLink } from "react-router-dom";
 
 type Props = {
