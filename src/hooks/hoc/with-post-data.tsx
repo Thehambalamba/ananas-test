@@ -1,12 +1,17 @@
 import { fetchPostWithCommentsAndUser } from "@/api/queries";
-import type { Post } from "@/api/types";
+import type { Comment, Post } from "@/api/types";
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "@utils/constants";
 
-interface WithPostDataProps {
-	postData: Post;
+type WithPostDataProps = {
 	helloMessage: string;
-}
+	id: number;
+	title: string;
+	body: string;
+	user: string;
+	comments: Comment[];
+	linkTo?: string;
+};
 
 function withPostData<P extends WithPostDataProps>(
 	WrappedComponent: React.ComponentType<P>,
@@ -27,10 +32,14 @@ function withPostData<P extends WithPostDataProps>(
 			return <p className="text-lg">Loading post...</p>;
 		}
 
+		if (!postData) {
+			return <p className="text-lg">Data not available post...</p>;
+		}
+
 		// Use 'unknown' as an intermediate step
 		const enhancedProps = {
 			...restProps,
-			postData: postData,
+			...postData,
 		} as unknown as P;
 
 		return <WrappedComponent {...enhancedProps} />;
