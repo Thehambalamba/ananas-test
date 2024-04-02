@@ -3,11 +3,11 @@ import Comment from "@/components/comment";
 
 const COMPONENT_NAME = "<CommentList />";
 
-function CommentList({
-	comments,
-	helloMessage,
-}: { comments: CommentType[]; helloMessage: string }) {
+type Props = { comments: CommentType[]; helloMessage: string };
+
+function CommentList({ comments, helloMessage }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);
+
 	return (
 		<>
 			{comments.map(({ id, name, email, body, postId }) => (

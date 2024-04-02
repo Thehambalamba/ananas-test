@@ -1,4 +1,4 @@
-import { fetchPostsWithCommentsAndUsers } from "@/api/queries";
+import { fetchPostsWithCommentsAndUser } from "@/api/queries";
 import type { PostsWithCommentsAndUser } from "@/api/types";
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "@utils/constants";
@@ -14,7 +14,7 @@ function withAllPostsData<P extends WithPostsDataProps>(
 		const { data: postsData, isLoading } = useQuery<PostsWithCommentsAndUser[]>(
 			{
 				queryKey: [QueryKeys.POSTS],
-				queryFn: fetchPostsWithCommentsAndUsers,
+				queryFn: fetchPostsWithCommentsAndUser,
 			},
 		);
 

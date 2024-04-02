@@ -14,9 +14,9 @@ import Posts from "@pages/posts";
 
 const COMPONENT_NAME = "<Root />";
 
-interface Props {
+type Props = {
 	helloMessage: string;
-}
+};
 
 function App({ helloMessage }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);

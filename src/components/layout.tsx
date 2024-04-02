@@ -3,9 +3,9 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const COMPONENT_NAME = "<Layout />";
 
-interface Props {
+type Props = {
 	helloMessage: string;
-}
+};
 
 function Layout({ helloMessage }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);

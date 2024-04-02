@@ -6,10 +6,10 @@ import React from "react";
 
 const COMPONENT_NAME = "<Posts />";
 
-interface Props {
+type Props = {
 	helloMessage: string;
 	postsData: PostsWithCommentsAndUser[] | undefined;
-}
+};
 
 function Posts({ helloMessage, postsData }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);
@@ -17,7 +17,7 @@ function Posts({ helloMessage, postsData }: Props) {
 	return (
 		<div className="flex flex-col gap-6">
 			<section>
-				<p className="text-2xl">Posts</p>
+				<p className="text-2xl font-bold">Posts</p>
 			</section>
 			<section>
 				<Search helloMessage={helloMessage}>
@@ -53,6 +53,7 @@ function Posts({ helloMessage, postsData }: Props) {
 													body={body}
 													user={user}
 													comments={comments}
+													linkTo={`/post/${id}`}
 												/>
 											),
 										)}

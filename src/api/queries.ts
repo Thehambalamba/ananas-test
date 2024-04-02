@@ -12,7 +12,7 @@ export const queryClient = new QueryClient({
 
 const callJson = (response: Response) => response.json();
 
-export async function fetchPostsWithCommentsAndUsers() {
+export async function fetchPostsWithCommentsAndUser() {
 	try {
 		// Fetch posts, comments, and users
 		const posts = fetch("https://jsonplaceholder.typicode.com/posts").then(
@@ -28,7 +28,7 @@ export async function fetchPostsWithCommentsAndUsers() {
 		// Wait for all fetch operations to complete
 		return await Promise.all([posts, comments, users]).then(
 			([posts, comments, users]) => {
-				// Join posts and comments based on postId
+				// Join posts and comments and related user
 				const postsWithCommentsAndUser = posts.reduce(
 					(acc: PostsWithCommentsAndUser[], post) => {
 						const postComments = comments.filter(
@@ -46,6 +46,38 @@ export async function fetchPostsWithCommentsAndUsers() {
 				);
 
 				return Promise.resolve(postsWithCommentsAndUser);
+			},
+		);
+	} catch (error) {
+		return Promise.reject(error);
+	}
+}
+
+export async function fetchPostWithCommentsAndUser(postId: string) {
+	try {
+		// Fetch post, comments, and users
+		const post = fetch(
+			`https://jsonplaceholder.typicode.com/posts/${postId}`,
+		).then(callJson) as Promise<Post>;
+		const comments = fetch(
+			`https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
+		).then(callJson) as Promise<Comment[]>;
+		const users = fetch("https://jsonplaceholder.typicode.com/users").then(
+			callJson,
+		) as Promise<User[]>;
+
+		// Wait for all fetch operations to complete
+		return await Promise.all([post, comments, users]).then(
+			([post, comments, users]) => {
+				const postUser = users.find((user) => user.id === post.userId);
+
+				const postWithCommentsAndUser: PostsWithCommentsAndUser = {
+					...post,
+					comments,
+					user: postUser ? postUser.name : "Unknown User",
+				};
+
+				return Promise.resolve(postWithCommentsAndUser);
 			},
 		);
 	} catch (error) {
