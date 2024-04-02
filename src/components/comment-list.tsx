@@ -11,16 +11,15 @@ function CommentList({
 	return (
 		<>
 			{comments.map(({ id, name, email, body, postId }) => (
-				<span className="px-6 py-2" key={`post-${postId}-comment-${id}`}>
-					<Comment
-						helloMessage={helloMessage}
-						id={id}
-						name={name}
-						email={email}
-						body={body}
-						postId={postId}
-					/>
-				</span>
+				<Comment
+					key={`post-${postId}-comment-${id}`}
+					helloMessage={helloMessage}
+					id={id}
+					name={name}
+					email={email}
+					body={body}
+					postId={postId}
+				/>
 			))}
 		</>
 	);

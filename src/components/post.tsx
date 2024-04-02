@@ -1,5 +1,6 @@
 import type { Comment as CommentType } from "@/api/types";
 import CommentList from "@/components/comment-list";
+import { NavLink } from "react-router-dom";
 
 type Props = {
 	helloMessage: string;
@@ -16,16 +17,28 @@ function Post({ helloMessage, id, title, body, user, comments }: Props) {
 	const commentCount = comments.length;
 
 	return (
-		<article className="p-4 flex flex-col">
-			<div>
-				<h2 className="text-xl capitalize">{title}</h2>
-				<p className="text-base capitalize">{body}</p>
-				<span className="flex justify-between">
-					<p className="text-sm	">Number of comments: {commentCount}</p>
-					<p className="text-sm">{user}</p>
-				</span>
-			</div>
-			<CommentList comments={comments} helloMessage={helloMessage} />
+		<article className="flex flex-col">
+			<NavLink
+				key={`post-${id}`}
+				to={`/post/${id}`}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<section className="flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4">
+					<h2 className="text-xl capitalize">{title}</h2>
+					<p className="text-base capitalize pl-2">{body}</p>
+					<span className="flex justify-between px-2">
+						<p className="text-sm	text-green-500">
+							Number of comments: {commentCount}
+						</p>
+						<p className="text-sm text-blue-500">{user}</p>
+					</span>
+				</section>
+			</NavLink>
+
+			<section className="border-l-2 pl-8 flex flex-col gap-4">
+				<CommentList comments={comments} helloMessage={helloMessage} />
+			</section>
 		</article>
 	);
 }
