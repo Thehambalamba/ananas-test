@@ -35,6 +35,7 @@ function Posts({ helloMessage, postsData }: Props) {
 							<section className="flex flex-col gap-6">
 								<input
 									type="text"
+									className="border-2 p-2 rounded-lg w-1/6"
 									value={searchQuery}
 									onChange={(e) => {
 										handleSearch(e.target.value);
