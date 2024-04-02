@@ -44,20 +44,18 @@ function Posts({ helloMessage, postsData }: Props) {
 								/>
 								{hasPosts ? (
 									<div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
-										{filteredPosts?.map(
-											({ id, title, body, user, comments }) => (
-												<Post
-													key={`post-${id}`}
-													id={id}
-													helloMessage={helloMessage}
-													title={title}
-													body={body}
-													user={user}
-													comments={comments}
-													linkTo={`/post/${id}`}
-												/>
-											),
-										)}
+										{filteredPosts?.map(({ id, title, body, user, comments }) => (
+											<Post
+												key={`post-${id}`}
+												id={id}
+												helloMessage={helloMessage}
+												title={title}
+												body={body}
+												user={user}
+												comments={comments}
+												linkTo={`/post/${id}`}
+											/>
+										))}
 									</div>
 								) : (
 									<p className="text-xl">No posts present.</p>

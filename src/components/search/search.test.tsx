@@ -33,10 +33,7 @@ describe("<Search />", () => {
 
 		fireEvent.change(inputElement, { target: { value: "Test query" } });
 		expect(mockChildren).toHaveBeenCalledTimes(2);
-		expect(mockChildren).toHaveBeenCalledWith(
-			"Test query",
-			expect.any(Function),
-		);
+		expect(mockChildren).toHaveBeenCalledWith("Test query", expect.any(Function));
 
 		expect(consoleSpy).toHaveBeenCalledTimes(2);
 		expect(consoleSpy).toHaveBeenCalledWith(

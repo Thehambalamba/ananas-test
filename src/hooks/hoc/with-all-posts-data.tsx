@@ -11,12 +11,10 @@ function withAllPostsData<P extends WithPostsDataProps>(
 	WrappedComponent: React.ComponentType<P>,
 ) {
 	return (props: Omit<P, keyof WithPostsDataProps>) => {
-		const { data: postsData, isLoading } = useQuery<PostsWithCommentsAndUser[]>(
-			{
-				queryKey: [QueryKeys.POSTS],
-				queryFn: fetchPostsWithCommentsAndUser,
-			},
-		);
+		const { data: postsData, isLoading } = useQuery<PostsWithCommentsAndUser[]>({
+			queryKey: [QueryKeys.POSTS],
+			queryFn: fetchPostsWithCommentsAndUser,
+		});
 
 		if (isLoading) {
 			return <p className="text-lg">Loading posts...</p>;

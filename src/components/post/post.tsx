@@ -34,9 +34,7 @@ function Post({
 			<h2 className="text-xl capitalize font-medium">{title}</h2>
 			<p className="text-base capitalize pl-2">{body}</p>
 			<span className="flex justify-between px-2">
-				<p className="text-sm	text-green-500">
-					Number of comments: {commentCount}
-				</p>
+				<p className="text-sm	text-green-500">Number of comments: {commentCount}</p>
 				<p className="text-sm text-blue-500">{user}</p>
 			</span>
 		</section>
@@ -44,11 +42,7 @@ function Post({
 
 	return (
 		<article className="flex flex-col ">
-			{linkTo?.length ? (
-				<NavLink to={linkTo}>{PostContent}</NavLink>
-			) : (
-				PostContent
-			)}
+			{linkTo?.length ? <NavLink to={linkTo}>{PostContent}</NavLink> : PostContent}
 
 			<section className="border-l-2 pl-8 flex flex-col gap-4">
 				<CommentList comments={comments} helloMessage={helloMessage} />
