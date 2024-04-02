@@ -1,6 +1,6 @@
 import react from "@vitejs/plugin-react-swc";
 import path from "node:path";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,4 +15,9 @@ export default defineConfig({
 		},
 	},
 	plugins: [react()],
+	test: {
+		globals: true,
+		setupFiles: ["src/__test__/test-setup.ts"],
+		environment: "jsdom",
+	},
 });
