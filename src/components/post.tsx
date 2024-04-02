@@ -17,14 +17,9 @@ function Post({ helloMessage, id, title, body, user, comments }: Props) {
 	const commentCount = comments.length;
 
 	return (
-		<article className="flex flex-col">
-			<NavLink
-				key={`post-${id}`}
-				to={`/post/${id}`}
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<section className="flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4">
+		<article className="flex flex-col ">
+			<NavLink key={`post-${id}`} to={`/post/${id}`}>
+				<section className="flex flex-col gap-4 border-2 border-r-2 rounded-lg rounded-bl-none p-4 hover:border-blue-800">
 					<h2 className="text-xl capitalize">{title}</h2>
 					<p className="text-base capitalize pl-2">{body}</p>
 					<span className="flex justify-between px-2">

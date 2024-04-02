@@ -42,7 +42,7 @@ function Posts({ helloMessage, postsData }: Props) {
 									placeholder="Search posts..."
 								/>
 								{hasPosts ? (
-									<div className="flex flex-col gap-10">
+									<div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
 										{filteredPosts?.map(
 											({ id, title, body, user, comments }) => (
 												<Post
