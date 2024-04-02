@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import App from "./app";
 import "./index.css";
+
+const HELLO_TEXT = "Hello from";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
 	<React.StrictMode>
-		<App helloMessage={"Hello from "} />
+		<App helloMessage={HELLO_TEXT} />
 	</React.StrictMode>,
 );
