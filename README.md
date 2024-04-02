@@ -1,3 +1,54 @@
+# Setup instructions
+
+To run the project we need to have nodejs installed. The project uses `nvm` for Node version managment. Either install `nvm` using instructions [here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) or install current `LTS` version of [Node](https://nodejs.org/en/download). If you choose to use `nvm`, after install and cd into the project run `cat .nvmrc` and you should see the current version. After this run `nvm install {version}` and you should see:
+
+```bash
+Now using node {version} (npm {version}})
+```
+* Note that `pnpm env` can be used to manage node version but it requires standalone script install and a clean system (no Node installed). 
+
+Next we need to install pnpm using :
+
+```bash
+npm i -g pnpm
+```
+
+Then install dependecies using `pnpm install`.
+
+# Running scripts 
+
+The project uses [Biome](https://biomejs.dev/) for both formating and linting with the recomended settings.
+
+Format or check formating using:
+
+```bash
+pnpm format-check
+pnpm format
+```
+Run linter using:
+
+```bash
+pnpm lint
+```
+
+The dev scripts runs the development build of react:
+
+```bash
+pnpm dev
+```
+
+Build the project using the build command:
+
+```bash
+pnpm build
+```
+
+And preview /dist build using the preview command:
+
+```bash
+pnpm preview
+```
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
