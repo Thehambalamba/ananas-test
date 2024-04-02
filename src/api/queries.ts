@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { QueryKeys } from "../constants";
+import { QueryKeys } from "@utils/constants";
 
 // Create a client
 export const queryClient = new QueryClient({

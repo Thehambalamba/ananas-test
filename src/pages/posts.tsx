@@ -1,6 +1,6 @@
+import type { Comment, Post, User } from "@api/types";
 import { useQuery } from "@tanstack/react-query";
-import type { Comment, Post, User } from "../api/types";
-import { QueryKeys } from "../constants";
+import { QueryKeys } from "@utils/constants";
 
 const COMPONENT_NAME = "<Posts />";
 
