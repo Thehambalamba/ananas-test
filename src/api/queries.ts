@@ -1,6 +1,7 @@
 import { QueryClient } from "@tanstack/react-query";
 import type { Comment, Post, PostsWithCommentsAndUser, User } from "./types";
 
+const API_URL = "https://jsonplaceholder.typicode.com/";
 // Create a client
 export const queryClient = new QueryClient({
 	defaultOptions: {
@@ -15,15 +16,11 @@ const callJson = (response: Response) => response.json();
 export async function fetchPostsWithCommentsAndUser() {
 	try {
 		// Fetch posts, comments, and users
-		const posts = fetch("https://jsonplaceholder.typicode.com/posts").then(
-			callJson,
-		) as Promise<Post[]>;
-		const comments = fetch(
-			"https://jsonplaceholder.typicode.com/comments",
-		).then(callJson) as Promise<Comment[]>;
-		const users = fetch("https://jsonplaceholder.typicode.com/users").then(
-			callJson,
-		) as Promise<User[]>;
+		const posts = fetch(`${API_URL}/posts`).then(callJson) as Promise<Post[]>;
+		const comments = fetch(`${API_URL}/comments`).then(callJson) as Promise<
+			Comment[]
+		>;
+		const users = fetch(`${API_URL}/users`).then(callJson) as Promise<User[]>;
 
 		// Wait for all fetch operations to complete
 		return await Promise.all([posts, comments, users]).then(
@@ -56,15 +53,13 @@ export async function fetchPostsWithCommentsAndUser() {
 export async function fetchPostWithCommentsAndUser(postId: string) {
 	try {
 		// Fetch post, comments, and users
-		const post = fetch(
-			`https://jsonplaceholder.typicode.com/posts/${postId}`,
-		).then(callJson) as Promise<Post>;
-		const comments = fetch(
-			`https://jsonplaceholder.typicode.com/comments?postId=${postId}`,
-		).then(callJson) as Promise<Comment[]>;
-		const users = fetch("https://jsonplaceholder.typicode.com/users").then(
+		const post = fetch(`${API_URL}/posts/${postId}`).then(
 			callJson,
-		) as Promise<User[]>;
+		) as Promise<Post>;
+		const comments = fetch(`${API_URL}/comments?postId=${postId}`).then(
+			callJson,
+		) as Promise<Comment[]>;
+		const users = fetch(`${API_URL}/users`).then(callJson) as Promise<User[]>;
 
 		// Wait for all fetch operations to complete
 		return await Promise.all([post, comments, users]).then(
