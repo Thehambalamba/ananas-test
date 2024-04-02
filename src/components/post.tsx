@@ -1,5 +1,6 @@
 import type { Comment as CommentType } from "@/api/types";
-import Comment from "@components/comment";
+import CommentList from "@/components/comment-list";
+
 type Props = {
 	helloMessage: string;
 	id: number;
@@ -24,19 +25,7 @@ function Post({ helloMessage, id, title, body, user, comments }: Props) {
 					<p className="text-sm">{user}</p>
 				</span>
 			</div>
-
-			{comments.map(({ id, name, email, body, postId }) => (
-				<span className="px-6 py-2" key={`post-${postId}-comment-${id}`}>
-					<Comment
-						helloMessage={helloMessage}
-						id={id}
-						name={name}
-						email={email}
-						body={body}
-						postId={postId}
-					/>
-				</span>
-			))}
+			<CommentList comments={comments} helloMessage={helloMessage} />
 		</article>
 	);
 }
