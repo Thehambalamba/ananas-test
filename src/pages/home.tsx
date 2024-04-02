@@ -7,7 +7,7 @@ type Props = {
 function Home({ helloMessage }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);
 
-	return <p className="text-2xl">Home</p>;
+	return <p className="text-2xl font-bold">Home</p>;
 }
 
 export default Home;
