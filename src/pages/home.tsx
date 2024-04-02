@@ -7,7 +7,7 @@ interface Props {
 function Home({ helloMessage }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);
 
-	return <div>Hello world from Home!</div>;
+	return <p className="text-2xl">Home</p>;
 }
 
 export default Home;

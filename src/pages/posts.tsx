@@ -1,41 +1,62 @@
-import type { Comment, Post, User } from "@api/types";
-import { useQuery } from "@tanstack/react-query";
-import { QueryKeys } from "@utils/constants";
+import type { PostsWithCommentsAndUser } from "@/api/types";
+import Post from "@/components/post";
+import Search from "@/components/search";
+import withAllPostsData from "@/hooks/hoc/with-all-posts-data";
+import React from "react";
 
 const COMPONENT_NAME = "<Posts />";
 
 interface Props {
 	helloMessage: string;
+	postsData: PostsWithCommentsAndUser[] | undefined;
 }
 
-function Posts({ helloMessage }: Props) {
+function Posts({ helloMessage, postsData }: Props) {
 	console.log(`${helloMessage} ${COMPONENT_NAME}.`);
 
-	const { data: posts } = useQuery<Post[]>({ queryKey: [QueryKeys.POSTS] });
-	const { data: comments } = useQuery<Comment[]>({
-		queryKey: [QueryKeys.COMMENTS],
-	});
-	const { data: users } = useQuery<User[]>({ queryKey: [QueryKeys.USERS] });
+	return (
+		<div className="flex flex-col gap-6">
+			<section>
+				<p className="text-2xl">Posts</p>
+			</section>
+			<section>
+				<Search helloMessage={helloMessage}>
+					{(searchQuery, handleSearch) => {
+						const filteredPosts = React.useMemo(() => {
+							if (!postsData) return [];
+							return postsData.filter((post) =>
+								post.title.toLowerCase().includes(searchQuery.toLowerCase()),
+							);
+						}, [postsData, searchQuery]);
 
-	return posts?.map(({ id: postId, title, body, userId }) => (
-		<article key={postId} className="p-4 flex justify-between">
-			<div>
-				<h2 className="text-xl capitalize">{title}</h2>
-				<p className="text-base capitalize">{body}</p>
-			</div>
-			<div>
-				<div>Author: {users?.find(({ id }) => id === userId)?.name}</div>
-				<div>
-					Number of comments:{" "}
-					{
-						comments?.filter(
-							({ postId: commentPostId }) => commentPostId === postId,
-						).length
-					}
-				</div>
-			</div>
-		</article>
-	));
+						return (
+							<section>
+								<input
+									type="text"
+									value={searchQuery}
+									onChange={(e) => {
+										handleSearch(e.target.value);
+									}}
+									placeholder="Search posts..."
+								/>
+								{filteredPosts?.map(({ id, title, body, user, comments }) => (
+									<Post
+										key={`post-${id}`}
+										id={id}
+										helloMessage={helloMessage}
+										title={title}
+										body={body}
+										user={user}
+										comments={comments}
+									/>
+								))}
+							</section>
+						);
+					}}
+				</Search>
+			</section>
+		</div>
+	);
 }
 
-export default Posts;
+export default withAllPostsData(Posts);
