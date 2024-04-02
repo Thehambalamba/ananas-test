@@ -19,7 +19,7 @@ function Layout({ helloMessage }: Props) {
 
 	return (
 		<>
-			<header>
+			<header className="border-b-2">
 				<nav className="flex gap-2">
 					<NavLink to="/" className={styleLink}>
 						Home
@@ -29,7 +29,7 @@ function Layout({ helloMessage }: Props) {
 					</NavLink>
 				</nav>
 			</header>
-			<main>
+			<main className="px-4 mt-6">
 				<Outlet />
 			</main>
 			<footer />
