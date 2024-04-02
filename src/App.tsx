@@ -12,7 +12,7 @@ import Home from "@pages/home";
 import PostDetails from "@pages/post-details";
 import Posts from "@pages/posts";
 
-const COMPONENT_NAME = "<Root />";
+const COMPONENT_NAME = "<App />";
 
 type Props = {
 	helloMessage: string;
