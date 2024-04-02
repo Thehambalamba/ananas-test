@@ -1,13 +1,13 @@
 # Setup instructions
 
-To run the project we need to have nodejs installed. The project uses `nvm` for Node version managment. Either install `nvm` using instructions [here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) or install current `LTS` version of [Node](https://nodejs.org/en/download). If you choose to use `nvm`, after install and cd into the project run `cat .nvmrc` and you should see the current version. After this run `nvm install {version}` and you should see:
+To run the project we need to have Node installed. The project uses `nvm` for Node version managment. Either install `nvm` using instructions [here](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating) or install the version specified in `.nvmrc` from the official [site](https://nodejs.org/en/download). If you choose to use `nvm`, after install, `cd` into the project and run `cat .nvmrc` and you should see the current version. After this run `nvm install {currentversion}` and you should see:
 
 ```bash
-Now using node {version} (npm {version}})
+Now using node {currentversion} (npm {currentversion}})
 ```
 * Note that `pnpm env` can be used to manage node version but it requires standalone script install and a clean system (no Node installed). 
 
-Next we need to install pnpm using :
+Next we need to install pnpm using:
 
 ```bash
 npm i -g pnpm
