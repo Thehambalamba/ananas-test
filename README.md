@@ -31,7 +31,7 @@ Run linter using:
 pnpm lint
 ```
 
-The project uses `vitest` together with `rtl` and `jsdom` for testing. Run the twsts using:
+The project uses `vitest` together with `rtl` and `jsdom` for testing. Run the tests using:
 
 ```bash
 pnpm test
