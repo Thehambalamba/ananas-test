@@ -31,6 +31,12 @@ Run linter using:
 pnpm lint
 ```
 
+The project uses `vitest` together with `rtl` and `jsdom` for testing. Run the twsts using:
+
+```bash
+pnpm test
+```
+
 The dev scripts run's the development build of react:
 
 ```bash
